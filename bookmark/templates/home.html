@@ -1,0 +1,24 @@
+<!-- 이미지 업로드는 load static 설정을 주어야함 -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h2> 북마크 </h2>
+		{{urlcount}}개의 북마크가 있습니다.<br>
+		<!-- 파이썬 문법을 써야함, 반복문을 돌리기 위해서는 -->
+		{% for row in urllist %}
+			<!-- 주소는 url만들때 썻던 주소를 넣어줌 -->
+			<li> <a href="{{row.url}}">{{row.title}}</a> </li>
+			
+			
+		<!-- 닫을때는 endfor 사용해서 닫아주어야함 -->
+		{% endfor %}
+		<br>
+		<img src="{% static 'images/man.jpg' %}">	
+		
+	</body>	
+</html>

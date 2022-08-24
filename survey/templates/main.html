@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h2> 설문조사 </h2>
+		<!-- form 태그 이용 -->
+		<!-- post로 넘기면 post로 받아야함 -->
+		<!-- http://localhost:8000/survey/save 이런식으로 써야 되는데 -->
+		<form method="post" action="save">
+		<!-- 이런식으로 주어도 상관 없음 -->
+			<!-- 토크큰화 시켜서 넘겨야함, 보안처리 -->
+			{% csrf_token %}
+			<input type="hidden" name="survey_idx" value="{{survey.survey_idx}}">
+			<table border="1">
+				<tr>
+					<th colspan="2">
+						{{survey.question}}
+					</th>
+				</tr>
+				<tr>
+					<th> 선택 </th>
+					<td>
+						<input type="radio" name="num" value="1"> {{survey.ans1}}<br>
+						<input type="radio" name="num" value="2"> {{survey.ans2}}<br>
+						<input type="radio" name="num" value="3"> {{survey.ans3}}<br>
+						<input type="radio" name="num" value="4"> {{survey.ans4}}<br>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2">
+						<input type="submit" value="저장">
+						<input type="button" value="확인"
+						onclick="javascript:window.location.href='result?survey_idx={{survey.survey_idx}}'">
+					</th>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

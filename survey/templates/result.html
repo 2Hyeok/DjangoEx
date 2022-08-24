@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h2> {{survey_idx}}번 설문 결과 </h2>
+		<table border="1">
+			<tr>
+				<th> 항목 </th>
+				<th> 응답수 </th>
+				<th> 응답율 </th>
+			</tr>
+			<!--  튜플로 묶여 있기에 튜플로 출력 해야함 -->
+			{% for survey, answer in surveylist %}
+			<tr align="center">
+				<td> {{answer}} </td>
+				<td> {{survey.sum_num}} </td>
+				<td> {{survey.rate}} </td>
+			</tr>
+			{% endfor %}		
+		</table>	
+	</body>
+</html>
