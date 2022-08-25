@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>방명록</title>
+	</head>
+	<body>
+		<h2> 방명록 </h2>
+		<br>{{gbcount}} 개의 글이 있습니다.
+		<!-- 테이블 만드는것 전에 반복문을 돌려야함 -->
+		<!-- 비밀번호 입력칸도 있기에 form으로 만들어준다. 비밀번호 입력도 해주어야함 -->
+		<!--  csrf_token도 사용해야함 -->
+		<!-- http://localhost:8000/guestbook/write -->
+		<input type="button" value="글쓰기" onclick="location='write'"><br><br>
+		{% for gb in gblist %}
+			<!-- 넘기는 방식을 잘 명시해주어야함 get인지 post인지 -->
+			<form method="post" action="passwdck">
+				{% csrf_token %}
+			<!-- 누구의 비밀번호인지 확인해야함 -->
+				<input type="hidden" name="idx" value="{{gb.idx}}">
+				<table border="1" style="margin:5px">
+					<tr>
+						<th>이름</th>
+						<th align="center">{{gb.name}}</th>
+						<th>작성일</th>
+						<!-- 데이터 출력시 형식 지정가능 , 연도, 월, 일 -->
+						<th align="center">{{gb.postdate|date:"Y-m-d"}}</th>
+					</tr>
+					<tr>
+						<th> 이메일 </th>
+						<td colspan="3">&nbsp;{{gb.email}}</td>
+					</tr>
+					<tr>
+						<th> 내용 </th>
+						<td colspan="3"><pre>&nbsp;{{gb.content}}</pre></td>
+					</tr>
+					<tr>
+						<th> 비밀번호 </th>
+							<td>
+								<input type="password" name="passwd">
+							</td>
+						<th colspan="2">
+							<input type="submit" value="수정 / 삭제">
+						</th>
+					</tr>
+				</table>
+			</form>
+		{% endfor %}
+	</body>
+</html>

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bookmark',
     'survey', # 설문조사
+    'guestbook', # 방명록
 ]
 
 MIDDLEWARE = [

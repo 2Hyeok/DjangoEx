@@ -21,7 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path( "bookmark/", include("bookmark.urls")),
     path( "survey/", include("survey.urls")),
+    path( "guestbook/", include("guestbook.urls")),
 ]
 
 # localhost:8000/bookmark
 # localhost:8000/survey
+# localhost:8000/guestbook
