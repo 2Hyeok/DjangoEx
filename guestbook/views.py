@@ -56,9 +56,25 @@ def passwdck(request):
 
 # 삭제
 def delete(request):
-    idx = request.GET["idx"]
+    idx = request.GET["idx"] # get방식이기에 get으로 써줌
     Guestbook.objects.get(idx=idx).delete()
-    return redirect("list")
+    return redirect("list") # 리스트로 돌아감
 
+
+# 수정
+@csrf_exempt
 def update(request):
-    pass
+    idx = request.POST["idx"]
+    dto = Guestbook.objects.get(idx=idx)
+    newdto = Guestbook(
+        idx = dto.idx,
+        name = dto.name, # 이름은 수정 못하기에 넘어온 이름을 그대로 넣음
+        email = request.POST["email"],
+        passwd = request.POST["passwd"],
+        content = request.POST["content"]
+        )
+    # idx가 primary key이기때문에 중복값이 들어가지 않음
+    # 하지만 save를 한번더 호출하면 update가됨 -> 덮어쓴다의 개념
+    # save는 insert하는 기능도 있지만 한번더 호출하면 update하는 기능도 가지고있음
+    newdto.save()
+    return redirect("list") # 리스트로 돌아감

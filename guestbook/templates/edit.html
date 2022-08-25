@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -5,7 +6,9 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<h2>수정/ 삭제</h2>
+		{% block title %}<h2>수정/ 삭제</h2>{% endblock %}
+		
+		{% block contents %}
 		<form method="post" action="update">
 			{% csrf_token %}
 			<input type="hidden" name="idx" value="{{dto.idx}}">
@@ -45,5 +48,6 @@
 					</tr>
 				</table>
 		</form>
+		{% endblock %}
 	</body>
 </html>
